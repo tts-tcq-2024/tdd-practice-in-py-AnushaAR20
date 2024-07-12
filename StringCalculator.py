@@ -11,10 +11,10 @@ def convert_to_ints(numbers):
         raise ValueError("Invalid input. Please enter two numbers separated by a comma or a newline.")
 
 def validate_numbers(num1, num2):
-    if 0 <= num1 <= 999 and 0 <= num2 <= 999:
+    if 0 <= num1 <= 1000 and 0 <= num2 <= 1000:
         return num1, num2
     else:
-        raise ValueError("Both numbers must be between 0 and 999.")
+        return 0
 
 def add(input_str):
     if handle_null_input(input_str):
