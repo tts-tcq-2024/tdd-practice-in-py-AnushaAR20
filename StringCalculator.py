@@ -1,5 +1,5 @@
 def handle_null_input(input_str):
-    return not input_str or input_str.strip() == ""
+    return not input_str or input_str.strip() == "" or input_str.strip() == "0"
 
 def split_and_strip_input(input_str):
     return [num.strip() for num in input_str.replace('\n', ',').split(',')]
