@@ -1,43 +1,35 @@
-def handle_null_input(input_str):
+def handle_null_or_zero_input(input_str):
     return not input_str or input_str.strip() == "" or input_str.strip() == "0"
 
-def split_and_strip_input(input_str):
-    return [num.strip() for num in input_str.replace('\n', ',').split(',')]
+def parse_input_string(input_str):
+    delimiter = ","
+    numbers_str = input_str.strip()
+
+    if numbers_str.startswith("//"):
+        delimiter_end_idx = numbers_str.find("\n")
+        if delimiter_end_idx != -1:
+            delimiter = numbers_str[2:delimiter_end_idx]
+            numbers_str = numbers_str[delimiter_end_idx + 1:]
+
+    numbers = [num.strip() for num in numbers_str.replace('\n', delimiter).split(delimiter)]
+    return numbers
 
 def convert_to_ints(numbers):
     try:
-        return int(numbers[0]), int(numbers[1])
-    except (ValueError, IndexError):
-        raise ValueError("Invalid input. Please enter two numbers separated by a comma or a newline.")
+        return [int(num) for num in numbers]
+    except ValueError:
+        raise ValueError("Invalid input. Please enter valid numbers separated by the delimiter.")
 
-def validate_numbers(num1, num2):
-    if 0 <= num1 <= 1000 and 0 <= num2 <= 1000:
-        return num1, num2
-    else:
-        return 0
+def validate_numbers(numbers):
+    return [num for num in numbers if num <= 1000]
 
 def add(input_str):
-    if handle_null_input(input_str):
+    if handle_null_or_zero_input(input_str):
         return 0
 
-    numbers = split_and_strip_input(input_str)
-    num1, num2 = convert_to_ints(numbers)
-    num1, num2 = validate_numbers(num1, num2)
+    numbers = parse_input_string(input_str)
+    numbers = convert_to_ints(numbers)
+    numbers = validate_numbers(numbers)
     
-    return num1 + num2
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    return sum(numbers)
 
