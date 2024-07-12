@@ -1,7 +1,11 @@
-def add(input_str):
+def add_numbers(input_str):
+    # Handle null input
+    if not input_str or input_str.strip() == "":
+        return 0
+
     # Split the input string by comma or newline character
     numbers = input_str.replace('\n', ',').split(',')
-    
+
     # Convert the split strings to integers
     try:
         num1 = int(numbers[0].strip())
@@ -14,6 +18,16 @@ def add(input_str):
         return num1 + num2
     else:
         return "Both numbers must be between 0 and 999."
+
+# Example usage
+input_str = "123, 456"  # or "123\n456"
+result = add_numbers(input_str)
+print(result)  # Output should be 579
+
+# Example with null input
+input_str = ""
+result = add_numbers(input_str)
+print(result)  # Output should be 0
 
 
 
