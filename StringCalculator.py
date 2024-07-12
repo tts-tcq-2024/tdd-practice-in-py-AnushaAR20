@@ -16,7 +16,7 @@ def validate_numbers(num1, num2):
     else:
         raise ValueError("Both numbers must be between 0 and 999.")
 
-def add_numbers(input_str):
+def add(input_str):
     if handle_null_input(input_str):
         return 0
 
