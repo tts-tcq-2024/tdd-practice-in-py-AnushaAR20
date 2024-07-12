@@ -16,16 +16,17 @@ def validate_numbers(num1, num2):
     else:
         raise ValueError("Both numbers must be between 0 and 999.")
 
-def prepare_numbers(input_str):
+def add_numbers(input_str):
     if handle_null_input(input_str):
-        return 0, 0
+        return 0
 
     numbers = split_and_strip_input(input_str)
     num1, num2 = convert_to_ints(numbers)
-    return validate_numbers(num1, num2)
-
-def add(num1, num2):
+    num1, num2 = validate_numbers(num1, num2)
+    
     return num1 + num2
+
+
 
 
 
