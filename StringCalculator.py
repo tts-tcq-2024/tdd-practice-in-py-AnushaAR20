@@ -1,5 +1,5 @@
 def handle_null_input(input_str):
-    return 0 if not input_str or input_str.strip() == "" else None
+    return not input_str or input_str.strip() == ""
 
 def split_and_strip_input(input_str):
     return [num.strip() for num in input_str.replace('\n', ',').split(',')]
@@ -13,28 +13,19 @@ def convert_to_ints(numbers):
 def validate_numbers(num1, num2):
     return 0 <= num1 <= 999 and 0 <= num2 <= 999
 
+def add_valid_numbers(num1, num2):
+    return num1 + num2 if validate_numbers(num1, num2) else "Both numbers must be between 0 and 999."
+
 def add(input_str):
-    # Check for null input
-    null_result = handle_null_input(input_str)
-    if null_result is not None:
-        return null_result
-
-    # Split and strip input
+    if handle_null_input(input_str):
+        return 0
+    
     numbers = split_and_strip_input(input_str)
-
-    # Convert to integers
     num1, num2 = convert_to_ints(numbers)
     if num1 is None or num2 is None:
         return "Invalid input. Please enter two numbers separated by a comma or a newline."
-
-    # Validate numbers
-    if validate_numbers(num1, num2):
-        return num1 + num2
-    else:
-        return "Both numbers must be between 0 and 999."
-
-
-
+    
+    return add_valid_numbers(num1, num2)
 
 
 
