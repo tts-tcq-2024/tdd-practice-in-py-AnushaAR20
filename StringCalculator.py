@@ -2,17 +2,27 @@ def handle_null_or_zero_input(input_str):
     return not input_str or input_str.strip() == "" or input_str.strip() == "0"
 
 def parse_input_string(input_str):
-    delimiter = ","
-    numbers_str = input_str.strip()
+    delimiter = determine_delimiter(input_str)
+    numbers_str = extract_numbers_string(input_str)
 
-    if numbers_str.startswith("//"):
-        delimiter_end_idx = numbers_str.find("\n")
+    return split_numbers(numbers_str, delimiter)
+
+def determine_delimiter(input_str):
+    if input_str.startswith("//"):
+        delimiter_end_idx = input_str.find("\n")
         if delimiter_end_idx != -1:
-            delimiter = numbers_str[2:delimiter_end_idx]
-            numbers_str = numbers_str[delimiter_end_idx + 1:]
+            return input_str[2:delimiter_end_idx]
+    return ","
 
-    numbers = [num.strip() for num in numbers_str.replace('\n', delimiter).split(delimiter)]
-    return numbers
+def extract_numbers_string(input_str):
+    if input_str.startswith("//"):
+        delimiter_end_idx = input_str.find("\n")
+        if delimiter_end_idx != -1:
+            return input_str[delimiter_end_idx + 1:]
+    return input_str
+
+def split_numbers(numbers_str, delimiter):
+    return [num.strip() for num in numbers_str.replace('\n', delimiter).split(delimiter)]
 
 def convert_to_ints(numbers):
     try:
